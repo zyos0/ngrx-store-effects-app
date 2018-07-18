@@ -4,7 +4,8 @@ import * as fromPizza from "../reducers/pizzas.reducer";
 import {createSelector} from "@ngrx/store";
 import {Pizza} from "../../models/pizza.model";
 
-export const getPizzaState = createSelector(fromFeature.getProductsState, (state: fromFeature.ProductsState) => state.pizzas);
+export const getPizzaState = createSelector(fromFeature.getProductsState,
+  (state: fromFeature.ProductsState) => state.pizzas);
 
 export const getPizzasEntities = createSelector(getPizzaState, fromPizza.getPizzasEntities);
 
