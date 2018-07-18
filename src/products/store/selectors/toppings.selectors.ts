@@ -14,5 +14,10 @@ export const getAllToppings = createSelector(getToppingsEntities,
     return Object.keys(entities).map(id => entities[parseInt(id, 10)])
   });
 
+export const getSelectedToppings = createSelector(
+  getToppingState,
+  fromToppin.getSelectedToppings
+);
+
 export const getToppingsLoaded = createSelector(getToppingState, fromToppin.getToppingsLoaded);
 export const getToppingsLoading = createSelector(getToppingState, fromToppin.getToppingsLoading);
