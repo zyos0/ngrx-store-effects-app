@@ -8,28 +8,7 @@ export interface PizzaState {
 }
 
 export const initialState: PizzaState = {
-  data: [{
-    "name": "Blazin' Inferno",
-    "toppings": [
-      {
-        "id": 10,
-        "name": "pepperoni"
-      },
-      {
-        "id": 2,
-        "name": "bacon"
-      },
-      {
-        "id": 4,
-        "name": "chili"
-      },
-      {
-        "id": 12,
-        "name": "tomato"
-      }
-    ],
-    "id": 1
-  }],
+  data: [],
   loaded: false,
   loading: false
 };
@@ -47,10 +26,12 @@ export function reducer(
       }
     }
     case fromPizzas.LOAD_PIZZAS_SUCCESS: {
+      const data = action.payload;
       return {
         ...state,
         loading: false,
-        loaded: true
+        loaded: true,
+        data
       }
     }
 
