@@ -5,6 +5,8 @@ import * as pizzaActions from '../actions/pizzas.action';
 import * as fromServices from '../../services';
 import {catchError, map, switchMap} from "rxjs/operators";
 import {of} from "rxjs/observable/of";
+import {PizzasAction} from "../actions/pizzas.action";
+import {UpdatePizza} from "../actions/pizzas.action";
 
 @Injectable()
 export class PizzasEffects {
@@ -32,9 +34,38 @@ export class PizzasEffects {
       switchMap(pizza => {
         return this.pizzaService.createPizza(pizza)
           .pipe(
-            map(pizza => new pizzaActions.createPizzaSuccess(pizza)),
+            map(pizza => new pizzaActions.CreatePizzaSuccess(pizza)),
             catchError(error => of(new pizzaActions.CreatePizzaFail(error)))
           )
       })
     )
+
+  @Effect()
+  updatePizza$ = this.actions$
+    .ofType(pizzaActions.UPDATE_PIZZA)
+    .pipe(
+      map((action: pizzaActions.UpdatePizza) => action.payload),
+      switchMap(pizza => {
+        return this.pizzaService.updatePizza(pizza)
+          .pipe(
+            map(pizza => new pizzaActions.UpdatePizzaSucces(pizza)),
+            catchError(error => of(new pizzaActions.UpdatePizzaFail(error)))
+          )
+      })
+    );
+
+
+  @Effect()
+  removePizza$ = this.actions$
+    .ofType(pizzaActions.REMOVE_PIZZA)
+    .pipe(
+      map((action: pizzaActions.RemovePizza) => action.payload),
+      switchMap(pizza => {
+        return this.pizzaService.removePizza(pizza)
+          .pipe(
+            map(() => new pizzaActions.RemovePizzaSuccess(pizza)),
+            catchError(error => of(new pizzaActions.RemovePizzaFail(error)))
+          )
+      })
+    );
 }

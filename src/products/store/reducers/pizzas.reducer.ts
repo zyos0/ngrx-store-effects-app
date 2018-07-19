@@ -61,6 +61,24 @@ export function reducer(
         entities
       }
     }
+
+    case fromPizzas.UPDATE_PIZZA_SUCCESS: {
+      const entities = {...state.entities, [action.payload.id]: action.payload};
+      return {
+        ...state,
+        entities
+      }
+    }
+
+    case fromPizzas.REMOVE_PIZZA_SUCCESS: {
+      const {[action.payload.id]: removed, ...entities} = state.entities
+      return {
+        ...state,
+        entities
+      }
+    }
+
+
   }
 
   return state;
