@@ -52,6 +52,15 @@ export function reducer(
         loaded: false
       }
     }
+
+
+    case fromPizzas.CREATE_PIZZA_SUCCESS: {
+      const entities = {...state.entities, [action.payload.id]: action.payload};
+      return {
+        ...state,
+        entities
+      }
+    }
   }
 
   return state;

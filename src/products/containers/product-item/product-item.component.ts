@@ -8,6 +8,7 @@ import {Topping} from '../../models/topping.model';
 import {Store} from "@ngrx/store";
 import {Observable} from "rxjs/Observable";
 import {tap} from "rxjs/operators";
+import {CreatePizza} from "../../store/actions/pizzas.action";
 
 
 @Component({
@@ -57,7 +58,7 @@ export class ProductItemComponent implements OnInit {
   }
 
   onCreate(event: Pizza) {
-
+    this.store.dispatch(new fromStore.CreatePizza(event))
   }
 
   onUpdate(event: Pizza) {
