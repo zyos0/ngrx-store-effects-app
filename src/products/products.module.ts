@@ -21,10 +21,15 @@ import * as fromStore from './store'
 
 import {EffectsModule} from "@ngrx/effects";
 
+//guards
+
+import * as fromGuards from './guards'
+
 // routes
 export const ROUTES: Routes = [
   {
     path: '',
+    canActivate: [fromGuards.PizzasGuard],
     component: fromContainers.ProductsComponent,
   },
 
@@ -44,11 +49,11 @@ export const ROUTES: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forChild(ROUTES),
-    StoreModule.forFeature('products',fromStore.reducers),
+    StoreModule.forFeature('products', fromStore.reducers),
     EffectsModule.forFeature(fromStore.effects)
 
   ],
-  providers: [...fromServices.services],
+  providers: [...fromServices.services, ...fromGuards.guards],
   declarations: [...fromContainers.containers, ...fromComponents.components],
   exports: [...fromContainers.containers, ...fromComponents.components],
 })
