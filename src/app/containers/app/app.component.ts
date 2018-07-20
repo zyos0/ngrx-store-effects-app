@@ -12,6 +12,7 @@ import { Component } from '@angular/core';
       <div class="app__nav">
         <a routerLink="products" routerLinkActive="active">Products</a>
       </div>
+      
       <div class="app__container">
         <router-outlet></router-outlet>
       </div>
